@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProductListCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UILabel *productNamelbl;
-@property (nonatomic, strong) IBOutlet UILabel *productPricelbl;
+@interface TableCell : UITableViewCell
+@property (nonatomic, strong) IBOutlet UILabel *lblName;
+@property (nonatomic, strong) IBOutlet UIImageView *imgThumb;
 
 @end
 
