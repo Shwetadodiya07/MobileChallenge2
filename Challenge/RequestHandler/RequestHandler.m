@@ -15,13 +15,10 @@
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
 
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
-    
+   // urlString = @"https://api.unsplash.com/photos?page=1&client_id=QV8a4T6ENyuyoPRxYuNLxDSIbeMRgUndYS9Q7nnOi6E";
     NSURL * url = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-   
-
-    [urlRequest setValue:ACCESSTOKEN forHTTPHeaderField:@"Authorization"];
     [urlRequest setHTTPMethod:type];
 
     NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:urlRequest];
@@ -38,9 +35,25 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
-    NSError* error;
-    NSMutableArray *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &error];
-    [self.delegate fetchResponse:jsonArray];
+    
+    NSError *error = nil;
+  
+    NSMutableArray *json = [NSJSONSerialization JSONObjectWithData:data
+    options:NSJSONReadingFragmentsAllowed
+      error:&error];
+    
+    if (error) {
+        NSLog(@"JSON Error: %@", error);
+        json = [self JSONFromFile];
+        [self.delegate fetchResponse:json];
+
+        //[self.delegate fetchError:error.description];
+        
+    }else{
+        [self.delegate fetchResponse:json];
+    }
+
+    
 }
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(NSError *)error
@@ -52,9 +65,15 @@ didCompleteWithError:(NSError *)error
     {
         NSLog(@"Error %@",[error userInfo]);
         if(error.code == -1009){
-            [self.delegate fetchError];
+            [self.delegate fetchError:INTERNETCONNECTION];
 
         }
     }
+}
+- (NSMutableArray *)JSONFromFile
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"JsonResponse" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 }
 @end

@@ -1,15 +1,12 @@
-//
-//  ProductListCell.m
-//  MVChallengeMobile
-//
-//  Created by shweta dodiya on 2020-06-18.
+
+//  Created by shweta dodiya on 2020-06-28.
 //  Copyright © 2020 shweta dodiya. All rights reserved.
 //
 
-#import "ProductListCell.h"
+#import "TableCell.h"
 
-@implementation ProductListCell
-@synthesize productNamelbl,productPricelbl;
+@implementation TableCell
+@synthesize lblName,imgThumb;
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

@@ -9,10 +9,9 @@
 #ifndef Constant_h
 #define Constant_h
 
-#define BASEURL @"https://api.waveapps.com/businesses/"
-#define BUSINESSID @"89746d57-c25f-4cec-9c63-34d7780b044b"
-#define ACCESSTOKEN @"Bearer 6W9hcvwRvyyZgPu9Odq7ko8DSY8Nfm"
-#define PRODUCTS @"/products/?"
+#define BASEURL @"https://api.unsplash.com/photos?"
+#define ACCESSKEY @"QV8a4T6ENyuyoPRxYuNLxDSIbeMRgUndYS9Q7nnOi6E"
+#define APIID @"page=1&"
 #define GETMETHODTYPE @"GET"
 #define POSTMETHODTYPE @"POST"
 #define INTERNETCONNECTION @"Internet Connection not Available"

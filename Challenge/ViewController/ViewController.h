@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "DetailViewController.h"
+#import "TableCell.h"
+#import "Constant.h"
+#import "RequestHandler.h"
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController<RequestHandlerServiceDelegate>
+{
+    int dataIndex;
+}
+@property (nonatomic, strong) IBOutlet UITableView *tblView;
+@property (nonatomic, strong) IBOutlet TableCell *cellTbl;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) RequestHandler *requesthandlerObj;
+@property (nonatomic, strong) NSMutableArray *imageList;
 
 @end
 

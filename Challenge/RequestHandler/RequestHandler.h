@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 -(void)fetchResponse:(NSMutableArray *)responseDic;
--(void)fetchError;
+-(void)fetchError:(NSString *)errormessage;
 
 @end
 
